@@ -1,27 +1,572 @@
-<!doctype html>
-<html lang="es">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Mi página</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MSU StatsHub — Medical Statistics Unit</title>
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+    <style>
+        /* ----- RESET & BASE ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+            background: #f4f8fc;
+            color: #1a2a3a;
+            line-height: 1.6;
+            padding: 0 1rem;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 1.5rem 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ----- HEADER / NAV ----- */
+        header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0 1.5rem 0;
+            border-bottom: 3px solid #1b5e8a;
+        }
+
+        .logo h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #0a3147;
+        }
+
+        .logo h1 span {
+            color: #1b7bb3;
+        }
+
+        .logo p {
+            font-size: 0.95rem;
+            color: #3a5a72;
+            font-weight: 400;
+            letter-spacing: 0.3px;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            font-weight: 500;
+            color: #1a3a4e;
+            padding: 0.4rem 0;
+            border-bottom: 2px solid transparent;
+            transition: 0.2s;
+            font-size: 1rem;
+        }
+
+        nav a:hover {
+            border-bottom-color: #1b7bb3;
+            color: #0a3147;
+        }
+
+        /* ----- HERO ----- */
+        .hero {
+            background: linear-gradient(135deg, #e5f0fa 0%, #cde0ef 100%);
+            padding: 2.5rem 2rem;
+            border-radius: 20px;
+            margin: 2rem 0 2.5rem 0;
+            box-shadow: 0 4px 12px rgba(0, 20, 40, 0.06);
+        }
+
+        .hero h2 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: #0a3147;
+        }
+
+        .hero h2 i {
+            color: #1b7bb3;
+            margin-right: 0.5rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 750px;
+            margin-top: 0.6rem;
+            color: #1d3f56;
+        }
+
+        .hero .badge {
+            display: inline-block;
+            margin-top: 1.2rem;
+            background: #1b5e8a;
+            color: #fff;
+            padding: 0.4rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+
+        /* ----- SECTION TITLES ----- */
+        section {
+            margin: 3.5rem 0 2.5rem 0;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #0a3147;
+            margin-bottom: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-title i {
+            color: #1b7bb3;
+            font-size: 1.9rem;
+        }
+
+        /* ----- TOOLS / APPS (cards) ----- */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.8rem;
+        }
+
+        .card {
+            background: #ffffff;
+            padding: 1.8rem 1.5rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+            border: 1px solid #e2edf6;
+            transition: transform 0.15s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 28px rgba(0, 30, 60, 0.08);
+        }
+
+        .card i {
+            font-size: 2.2rem;
+            color: #1b7bb3;
+            margin-bottom: 0.7rem;
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #0a3147;
+            margin-bottom: 0.3rem;
+        }
+
+        .card p {
+            color: #2d4b62;
+            font-size: 0.95rem;
+            margin: 0.4rem 0 1rem 0;
+        }
+
+        .card .tag {
+            display: inline-block;
+            background: #e6f0f9;
+            color: #1b5e8a;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.2rem 0.8rem;
+            border-radius: 40px;
+            letter-spacing: 0.2px;
+            margin-bottom: 0.6rem;
+        }
+
+        .card .btn {
+            display: inline-block;
+            margin-top: 0.5rem;
+            background: #1b5e8a;
+            color: #fff;
+            padding: 0.5rem 1.4rem;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: background 0.2s;
+        }
+
+        .card .btn:hover {
+            background: #0f4363;
+        }
+
+        .card .btn-outline {
+            background: transparent;
+            color: #1b5e8a;
+            border: 1.5px solid #1b5e8a;
+            padding: 0.5rem 1.4rem;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: 0.2s;
+        }
+
+        .card .btn-outline:hover {
+            background: #1b5e8a;
+            color: #fff;
+        }
+
+        /* ----- RESOURCES (list style) ----- */
+        .resource-list {
+            background: #ffffff;
+            border-radius: 16px;
+            border: 1px solid #e2edf6;
+            overflow: hidden;
+        }
+
+        .resource-item {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.5rem 1.5rem;
+            padding: 1.2rem 1.8rem;
+            border-bottom: 1px solid #e9f0f6;
+            transition: background 0.1s ease;
+        }
+
+        .resource-item:last-child {
+            border-bottom: none;
+        }
+
+        .resource-item:hover {
+            background: #f6faff;
+        }
+
+        .resource-item .icon {
+            font-size: 1.4rem;
+            width: 2.2rem;
+            color: #1b7bb3;
+        }
+
+        .resource-item .info {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .resource-item .info .title {
+            font-weight: 600;
+            color: #0a3147;
+        }
+
+        .resource-item .info .desc {
+            font-size: 0.9rem;
+            color: #3a5a72;
+        }
+
+        .resource-item .link {
+            background: #eaf2f9;
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #1b5e8a;
+            transition: 0.2s;
+            white-space: nowrap;
+        }
+
+        .resource-item .link:hover {
+            background: #1b5e8a;
+            color: #fff;
+        }
+
+        /* ----- CONTACT / ABOUT ----- */
+        .contact-box {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 2rem 2.2rem;
+            border: 1px solid #e2edf6;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .contact-box .info h3 {
+            font-size: 1.4rem;
+            color: #0a3147;
+        }
+
+        .contact-box .info p {
+            color: #2d4b62;
+            margin-top: 0.2rem;
+        }
+
+        .contact-box .info i {
+            color: #1b7bb3;
+            width: 1.8rem;
+        }
+
+        .contact-box .email-btn {
+            background: #1b5e8a;
+            color: #fff;
+            padding: 0.7rem 2rem;
+            border-radius: 40px;
+            font-weight: 600;
+            transition: 0.2s;
+            white-space: nowrap;
+        }
+
+        .contact-box .email-btn:hover {
+            background: #0f4363;
+        }
+
+        /* ----- FOOTER ----- */
+        footer {
+            margin-top: 4rem;
+            padding: 1.8rem 0 1rem 0;
+            border-top: 1px solid #d4e2ed;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            color: #2d4b62;
+            font-size: 0.9rem;
+        }
+
+        footer .footer-links a {
+            margin-left: 1.5rem;
+            color: #1b5e8a;
+            font-weight: 500;
+        }
+
+        footer .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* ----- RESPONSIVE ----- */
+        @media (max-width: 700px) {
+            header {
+                flex-direction: column;
+                align-items: start;
+                gap: 0.8rem;
+            }
+
+            nav {
+                gap: 1.2rem;
+            }
+
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .contact-box {
+                flex-direction: column;
+                align-items: start;
+            }
+
+            .resource-item {
+                flex-direction: column;
+                align-items: start;
+                gap: 0.4rem;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 0.8rem;
+                align-items: start;
+            }
+
+            footer .footer-links a {
+                margin-left: 0;
+                margin-right: 1.2rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>Mi página personal</h1>
 
-  <h2>Páginas:</h2>
-  <ul>
-    <li><a href="about.html">Sobre mí</a></li>
-    <li><a href="notes.html">Notas / recursos</a></li>
-    <li><a href="talks.html">Charlas y talleres</a></li>
-    <li><a href="tools.html">Herramientas</a></li>
-  </ul>
+<div class="container">
 
-  <h3>Proyectos:</h3>
-  <ul>
-    <li><a href="https://github.com/tuusuario/proyecto">Mi GitHub</a></li>
-    <li><a href="#">Libro o documento</a></li>
-    <li><a href="#">Aplicación web</a></li>
-  </ul>
+    <!-- ===== HEADER ===== -->
+    <header>
+        <div class="logo">
+            <h1>MSU <span>StatsHub</span></h1>
+            <p>Medical Statistics Unit · Biostatistics &amp; Evidence</p>
+        </div>
+        <nav>
+            <a href="#tools">Tools</a>
+            <a href="#resources">Resources</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
 
-  <p>© Tu nombre 2026–</p>
+    <!-- ===== HERO ===== -->
+    <div class="hero">
+        <h2><i class="fas fa-chart-line"></i> Your gateway to biostatistical tools</h2>
+        <p>
+            Curated apps, calculators, reference papers, and learning materials
+            for the Medical Statistics Unit — built for clinicians, researchers, and students.
+        </p>
+        <span class="badge"><i class="fas fa-flask"></i> Evidence-based · Open access</span>
+    </div>
+
+    <!-- ===== TOOLS / APPS ===== -->
+    <section id="tools">
+        <div class="section-title">
+            <i class="fas fa-calculator"></i> Tools &amp; Apps
+        </div>
+        <div class="card-grid">
+
+            <div class="card">
+                <i class="fas fa-heartbeat"></i>
+                <span class="tag">Diagnostic</span>
+                <h3>Predictive Values</h3>
+                <p>Calculate PPV, NPV, sensitivity, specificity from prevalence and test accuracy.</p>
+                <a href="#" class="btn">Launch app</a>
+            </div>
+
+            <div class="card">
+                <i class="fas fa-balance-scale"></i>
+                <span class="tag">Biostatistics</span>
+                <h3>Sample Size</h3>
+                <p>Estimate required sample size for clinical trials, cohort studies, and surveys.</p>
+                <a href="#" class="btn">Launch app</a>
+            </div>
+
+            <div class="card">
+                <i class="fas fa-table"></i>
+                <span class="tag">Epidemiology</span>
+                <h3>2×2 Table Builder</h3>
+                <p>Build contingency tables and compute OR, RR, AR, NNT with confidence intervals.</p>
+                <a href="#" class="btn">Launch app</a>
+            </div>
+
+            <div class="card">
+                <i class="fas fa-robot"></i>
+                <span class="tag">Machine Learning</span>
+                <h3>ROC &amp; AUC</h3>
+                <p>Upload data to plot ROC curves and compare diagnostic models interactively.</p>
+                <a href="#" class="btn-outline">Coming soon</a>
+            </div>
+
+            <div class="card">
+                <i class="fas fa-file-alt"></i>
+                <span class="tag">Reporting</span>
+                <h3>STROBE / CONSORT</h3>
+                <p>Checklist-based app to ensure your manuscript meets reporting standards.</p>
+                <a href="#" class="btn-outline">Coming soon</a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ===== RESOURCES ===== -->
+    <section id="resources">
+        <div class="section-title">
+            <i class="fas fa-book-open"></i> Resources &amp; Papers
+        </div>
+
+        <div class="resource-list">
+
+            <div class="resource-item">
+                <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                <div class="info">
+                    <div class="title">STROBE Statement</div>
+                    <div class="desc">Strengthening the reporting of observational studies in epidemiology.</div>
+                </div>
+                <a href="#" class="link">PDF</a>
+            </div>
+
+            <div class="resource-item">
+                <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                <div class="info">
+                    <div class="title">CONSORT 2010</div>
+                    <div class="desc">Consolidated standards for reporting randomised trials — checklist &amp; flow diagram.</div>
+                </div>
+                <a href="#" class="link">PDF</a>
+            </div>
+
+            <div class="resource-item">
+                <span class="icon"><i class="fas fa-globe"></i></span>
+                <div class="info">
+                    <div class="title">TRIPOD Statement</div>
+                    <div class="desc">Transparent reporting of a multivariable prediction model for individual prognosis or diagnosis.</div>
+                </div>
+                <a href="#" class="link">Visit</a>
+            </div>
+
+            <div class="resource-item">
+                <span class="icon"><i class="fas fa-chart-pie"></i></span>
+                <div class="info">
+                    <div class="title">Statistical Methods in Medical Research</div>
+                    <div class="desc">Curated reading list — from basic to advanced biostatistical techniques.</div>
+                </div>
+                <a href="#" class="link">Read</a>
+            </div>
+
+            <div class="resource-item">
+                <span class="icon"><i class="fas fa-video"></i></span>
+                <div class="info">
+                    <div class="title">MSU Webinar Series</div>
+                    <div class="desc">Recorded sessions on survival analysis, meta-analysis, and Bayesian methods.</div>
+                </div>
+                <a href="#" class="link">Watch</a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ===== ABOUT / CONTACT ===== -->
+    <section id="about">
+        <div class="section-title">
+            <i class="fas fa-users"></i> About the Unit
+        </div>
+        <div class="contact-box" id="contact">
+            <div class="info">
+                <h3><i class="fas fa-university"></i> Medical Statistics Unit (MSU)</h3>
+                <p>
+                    <i class="fas fa-map-pin"></i> Institute of Health Sciences · 3rd floor<br />
+                    <i class="fas fa-phone-alt"></i> +44 (0)20 7946 0123<br />
+                    <i class="fas fa-envelope"></i> stats.unit@institute.ac.uk
+                </p>
+                <p style="margin-top: 0.6rem; font-size: 0.95rem;">
+                    We support researchers in study design, data analysis, and interpretation
+                    across all medical disciplines.
+                </p>
+            </div>
+            <a href="mailto:stats.unit@institute.ac.uk" class="email-btn">
+                <i class="fas fa-paper-plane"></i> Get in touch
+            </a>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <span>&copy; 2026 MSU StatsHub — Medical Statistics Unit</span>
+        <div class="footer-links">
+            <a href="#"><i class="fab fa-github"></i> GitHub</a>
+            <a href="#"><i class="fab fa-twitter"></i> X</a>
+            <a href="#">Privacy</a>
+            <a href="#">Accessibility</a>
+        </div>
+    </footer>
+
+</div>
+
 </body>
 </html>
